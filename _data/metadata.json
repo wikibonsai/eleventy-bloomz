@@ -1,0 +1,21 @@
+{
+  "title": "eleventy-wikibonsai",
+  "url": "https://example.com/",
+  "language": "en",
+  "description": "Just keep tending...",
+  "feed": {
+    "subtitle": "Just keep tending...",
+    "filename": "feed.xml",
+    "path": "/feed/feed.xml",
+    "id": "https://example.com/"
+  },
+  "jsonfeed": {
+    "path": "/feed/feed.json",
+    "url": "https://example.com/feed/feed.json"
+  },
+  "author": {
+    "name": "Your Name Here",
+    "email": "youremailaddress@example.com",
+    "url": "https://example.com/about-me/"
+  }
+}

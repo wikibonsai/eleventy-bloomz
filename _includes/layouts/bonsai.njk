@@ -1,0 +1,15 @@
+---
+layout: layouts/home.njk
+eleventyNavigation:
+  key: Bonsai
+  order: 2
+---
+
+<h1>Semantic Tree</h1>
+
+<p>
+  {% for node in bonsai %}
+    {% set file_url = collections.all | findNodeUrl(node.text) %}
+    <p>{% for ancestor in node.ancestors %}&nbsp;{% endfor %}- <a id="{{ node.text }}" class="wiki link" href="{{ file_url }}">{{ node.text }}</a></p>
+  {% endfor %}
+</p>

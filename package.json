@@ -1,0 +1,39 @@
+{
+  "name": "eleventy-wikibonsai",
+  "version": "0.0.1",
+  "description": "A starter repository for a WikiBonsai blog web site using the Eleventy static site generator.",
+  "license": "MIT",
+  "author": {
+    "name": "manunamz",
+    "email": "manuanmz@pm.me"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wikibonsai/eleventy-wikibonsai"
+  },
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "bench": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+    "watch": "npx @11ty/eleventy --watch",
+    "serve": "npx @11ty/eleventy --serve",
+    "start": "npx @11ty/eleventy --serve",
+    "debug": "DEBUG=* npx @11ty/eleventy"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^1.0.1",
+    "@11ty/eleventy-navigation": "^0.3.3",
+    "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.1.0",
+    "caml-mkdn": "^0.0.1",
+    "glob": "^8.1.0",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "luxon": "^2.4.0",
+    "markdown-it": "^13.0.1",
+    "markdown-it-anchor": "^8.6.4",
+    "markdown-it-caml": "^0.0.1",
+    "markdown-it-wikirefs": "^0.0.1",
+    "semtree": "^0.0.1",
+    "wikirefs": "^0.0.1"
+  }
+}

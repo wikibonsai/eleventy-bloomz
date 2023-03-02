@@ -1,0 +1,399 @@
+/* Defaults */
+:root {
+  --font-family: -apple-system, system-ui, sans-serif;
+  --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+  --color-gray-20: #e0e0e0;
+  --color-gray-50: #C0C0C0;
+  --color-gray-90: #333;
+
+  --background-color: #fff;
+
+  /* --text-color is assigned to --color-gray-_ above */
+  --text-color: var(--color-gray-90);
+
+  --text-color-invalid-wikilink: #8c8c8c;
+
+  --text-color-link: #264caf;
+  --text-color-link-visited: #204092;
+  --text-color-wiki: #009c7b;
+  --text-color-wiki-visited: #008064;
+
+  --background-color: #e4f3ea;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-20: #e0e0e0;
+    --color-gray-50: #C0C0C0;
+    --color-gray-90: #333;
+
+    --text-color: var(--color-gray-50);
+
+    --text-color-invalid-wikilink: #8c8c8c;
+
+    --text-color-link: #82aecd;
+    --text-color-link-visited: #59b3f3;
+    --text-color-wiki: #a0e4a0;
+    --text-color-wiki-visited: #90f390;
+
+    --background-color: #27262b;
+  }
+}
+
+
+/* Global stylesheet */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+hr {
+  opacity: 80%;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+p,
+.tmpl-post li,
+img {
+  max-width: 37.5em; /* 600px /16 */
+}
+p,
+.tmpl-post li {
+  line-height: 1.45;
+}
+
+/* external links */
+a[href] {
+  color: var(--text-color-link);
+}
+a[href]:visited {
+  color: var(--text-color-link-visited);
+}
+/* (compare to wikilinks styles below) */
+
+
+main {
+  min-height: 90%;
+  padding: 1rem;
+}
+main :first-child {
+  margin-top: 0;
+}
+header {
+  border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+footer {
+  padding: 1em;
+  opacity: 80%;
+}
+
+table {
+  margin: 1em 0;
+}
+table td,
+table th {
+  padding-right: 1em;
+}
+
+pre,
+code {
+  font-family: var(--font-family-monospace);
+  line-height: 1.5;
+}
+pre {
+  font-size: 14px;
+  line-height: 1.375;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  padding: 1em;
+  margin: .5em 0;
+  background-color: #f6f6f6;
+}
+code {
+  word-break: break-all;
+}
+
+/* Header */
+.home {
+  padding: 0 1rem;
+  float: left;
+  margin: 1rem 0; /* 16px /16 */
+  font-size: 1em; /* 16px /16 */
+}
+.home :link:not(:hover) {
+  text-decoration: none;
+}
+
+/* Nav */
+.nav {
+  padding: 0;
+  list-style: none;
+  float: left;
+  margin-left: 1em;
+}
+.nav-item {
+  display: inline-block;
+  margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+  text-decoration: none;
+}
+.nav-item-active {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+  list-style: none;
+  padding: 0;
+}
+.postlist-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  counter-increment: start-from -1;
+  line-height: 1.8;
+}
+.postlist-item:before {
+  display: inline-block;
+  pointer-events: none;
+  content: "" counter(start-from, decimal-leading-zero) ". ";
+  line-height: 100%;
+  text-align: right;
+}
+.postlist-date,
+.postlist-item:before {
+  font-size: 0.8125em; /* 13px /16 */
+  /* color: var(--color-gray-90); */
+}
+.postlist-date {
+  word-spacing: -0.5px;
+}
+.postlist-link {
+  padding-left: .25em;
+  padding-right: .25em;
+  text-underline-position: from-font;
+  text-underline-offset: 0;
+  text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+  font-weight: bold;
+}
+.tmpl-home .postlist-link {
+  font-size: 1.1875em; /* 19px /16 */
+  font-weight: 700;
+}
+
+
+/* Tags */
+.post-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 0.75em; /* 12px /16 */
+  padding: 0.08333333333333em 0.3333333333333em; /* 1px 4px /12 */
+  margin-left: 0.6666666666667em; /* 8px /12 */
+  margin-top: 0.5em; /* 6px /12 */
+  margin-bottom: 0.5em; /* 6px /12 */
+  color: var(--color-gray-90);
+  border: 1px solid var(--color-gray-50);
+  border-radius: 0.25em; /* 3px /12 */
+  text-decoration: none;
+  line-height: 1.8;
+}
+a[href].post-tag,
+a[href].post-tag:visited {
+  color: inherit;
+}
+a[href].post-tag:hover,
+a[href].post-tag:focus {
+  background-color: var(--color-gray-20);
+}
+.postlist-item > .post-tag {
+  align-self: center;
+}
+
+/* Infobox */
+:root {
+  --color-infobox: #c7e6d3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-infobox: #44434d;
+  }
+}
+
+.infobox {
+  background-color: var(--color-infobox);
+  color: var(--text-color);
+  padding: 1em 0.625em; /* 16px 10px /16 */
+}
+.infobox ol:only-child {
+  margin: 0;
+}
+
+/* Direct Links / Markdown Headers */
+.direct-link {
+  font-family: sans-serif;
+  text-decoration: none;
+  font-style: normal;
+  margin-left: .1em;
+}
+a[href].direct-link,
+a[href].direct-link:visited {
+  color: transparent;
+}
+a[href].direct-link:focus,
+a[href].direct-link:focus:visited,
+:hover > a[href].direct-link,
+:hover > a[href].direct-link:visited {
+  color: #aaa;
+}
+
+
+/******************/
+/* wikiref styles */
+/******************/
+
+
+/* wikiattr */
+
+/* attrbox */
+aside.attrbox {
+  text-align: center;
+  border: 1px double #ccc;
+  color: #ccc;
+  border-radius: 25px;
+  border-spacing: 1em;
+  /* @noflip */
+  margin: 0.5em;
+  padding: 0.2em;
+  /* @noflip */
+  float: right;
+}
+span.attrbox-title {
+  margin: 0.5em;
+  color: #ccc;
+}
+/* from: https://www.the-art-of-web.com/css/format-dl/ */
+dl {
+  margin: 0.5em;
+}
+dt {
+  width: 100px;
+  float: left;
+  clear: left;
+  text-align: right;
+  font-weight: bold;
+}
+dt::after {
+  content: ":";
+}
+dd {
+  margin: 0 0 0 110px;
+  padding: 0 0 0.5em 0;
+}
+
+/* (internal) wikilinks */
+a.wiki[href] {
+  color: var(--text-color-wiki);
+}
+a.wiki[href]:visited {
+  color: var(--text-color-wiki-visited);
+}
+a.invalid {
+  color: var(--text-color-invalid-wikilink);
+  cursor: help;
+}
+
+/* !wikiembed */
+
+.embed-wrapper {
+  border: 1px solid #535353;
+  border-radius: 6px;
+  padding: 5px 20px 15px 20px;
+  margin: 0 20px;
+  position: relative;
+}
+.embed-title {
+  height: 36px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 26px;
+  line-height: 42px;
+  top: 5px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  font-weight: 900;
+}
+.embed-link {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  cursor: pointer;
+}
+.embed-link-icon {
+  text-decoration: none;
+}
+.link-icon {
+  font-size: 18px;
+  color: #535353;
+}
+.link-icon::before{
+  content: "🔗";
+}
+.embed-content {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+/* embed media */
+.embed-media {
+  margin: 0 auto;
+}
+.embed-audio {
+  height: 100%;
+  width: 100%;
+}
+.embed-image {
+  height: 50%;
+  width: 50%;
+}
+.embed-video {
+  height: 75%;
+  width: 75%;
+}
