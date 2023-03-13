@@ -1,5 +1,5 @@
 ---
-title: Wikirefs
+title: WikiRefs
 layout: layouts/entry.njk
 ---
 
