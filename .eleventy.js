@@ -98,6 +98,8 @@ module.exports = function(eleventyConfig) {
     // - the 'resolveEmbedContent' function definition needs to be near the
     //   'markdownLibrary' instance so 'markdownLibrary.render()' can be recursively called
     resolveEmbedContent: (env, fname) => {
+      // markdown-only
+      if (wikirefs.isMedia(fname)) { return; }
       // cycle detection
       if (!env.cycleStack) {
         env.cycleStack = [];
@@ -107,32 +109,29 @@ module.exports = function(eleventyConfig) {
           return '♻️ cycle detected';
         }
       }
-      // markdown
-      if (!wikirefs.isMedia(fname)) {
-        env.cycleStack.push(fname);
-        let htmlContent;
-        let doc = env.collections.all.find((doc) => {
-          return (fname === path.basename(doc.data.page.inputPath).replace(/\.[^/.]+$/, ''));
-        });
-        // htmlContent = doc.templateContent;
-        // default case
-        try {
-          const mkdnContent = fs.readFileSync(doc.inputPath, { encoding: 'utf8', flag: 'r' });
-          if (mkdnContent === undefined) {
-            htmlContent = undefined;
-          } else if (mkdnContent.length === 0) {
-            htmlContent = '';
-          } else {
-            htmlContent = markdownLibrary.render(mkdnContent, env);
-          }
-        // zombie (or error) case
-        } catch (e) {
-          console.warn(e);
-          htmlContent = '🧟';
+      env.cycleStack.push(fname);
+      // get content
+      let htmlContent;
+      let doc = env.collections.all.find((doc) => {
+        return (fname === path.basename(doc.data.page.inputPath).replace(/\.[^/.]+$/, ''));
+      });
+      // default case
+      try {
+        const mkdnContent = fs.readFileSync(doc.inputPath, { encoding: 'utf8', flag: 'r' });
+        if (mkdnContent === undefined) {
+          htmlContent = undefined;
+        } else if (mkdnContent.length === 0) {
+          htmlContent = '';
+        } else {
+          htmlContent = markdownLibrary.render(mkdnContent, env);
         }
-        delete env.cycleStack;
-        return htmlContent;
+      // zombie (or error) case
+      } catch (e) {
+        console.warn(e);
+        htmlContent = '🧟';
       }
+      delete env.cycleStack;
+      return htmlContent;
     },
   });
 
