@@ -24,16 +24,16 @@
     "@11ty/eleventy-navigation": "^0.3.3",
     "@11ty/eleventy-plugin-rss": "^1.2.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^4.1.0",
-    "caml-mkdn": "^0.0.1",
+    "caml-mkdn": "^0.0.2",
     "glob": "^8.1.0",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
     "luxon": "^2.4.0",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.4",
-    "markdown-it-caml": "^0.0.1",
-    "markdown-it-wikirefs": "^0.0.1",
-    "semtree": "^0.0.1",
-    "wikirefs": "^0.0.1"
+    "markdown-it-caml": "^0.0.2",
+    "markdown-it-wikirefs": "^0.0.2",
+    "semtree": "^0.0.2",
+    "wikirefs": "^0.0.2"
   }
 }
