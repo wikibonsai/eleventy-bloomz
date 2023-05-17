@@ -1,6 +1,6 @@
 # eleventy-wikibonsai
 
-![[A WikiBonsai Project](https://github.com/wikibonsai/wikibonsai)](https://img.shields.io/badge/%F0%9F%8E%8B-A%20WikiBonsai%20Project-brightgreen)
+[![A WikiBonsai Project](https://img.shields.io/badge/%F0%9F%8E%8B-A%20WikiBonsai%20Project-brightgreen)](https://github.com/wikibonsai/wikibonsai)
 
 An 11ty starter template with [wikibonsai](https://github.com/wikibonsai/wikibonsai) support.
 
