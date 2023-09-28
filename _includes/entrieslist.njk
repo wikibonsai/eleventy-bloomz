@@ -1,7 +1,0 @@
-<ul reversed class="entrylist" style="counter-reset: start-from {{ (entrieslistCounter or entrieslist.length) + 1 }}">
-{% for entry in entrieslist %}
-  <li class="entrylist-item{% if entry.url == url %} entrylist-item-active{% endif %}">
-    <a href="{{ entry.url | url }}" class="entrylist-link">{% if entry.data.title %}{{ entry.data.title }}{% else %}<code>{{ entry.url }}</code>{% endif %}</a>
-  </li>
-{% endfor %}
-</ul>

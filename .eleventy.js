@@ -161,7 +161,11 @@ module.exports = function(eleventyConfig) {
     const nodeFile = (files || []).find(file => indexFile.test(file.inputPath));
     return nodeFile ? nodeFile.url : '';
   }
+  function getNodes(nodes) {
+    return bonsai.tree.filter((node) => nodes.includes(node.text));
+  }
   eleventyConfig.addFilter("findNodeUrl", findNodeUrl);
+  eleventyConfig.addFilter("getNodes", getNodes);
 
   //////////////////////////
 
