@@ -2,43 +2,7 @@
 layout: layouts/base.njk
 templateClass: tmpl-post
 ---
+
 {{ content | safe }}
 
-
-<hr>
-
-<span>Attributed:</span>
-
-<ul>
-{%- for type, battrs in backattrs %}
-  <li>
-    {{ type }} :
-      <ul>
-        {%- for battr in battrs %}
-          <li><a class="wiki link" href="{{ battr.url | url }}" class="backattr">{{ battr.data.title }}</a></li>
-        {%- endfor %}
-      </ul>
-    </li>
-{%- endfor %}
-</ul>
-
-<span>Backlinks:</span>
-
-<ul>
-{%- for blink in backlinks %}
-  <li>
-    <p><a class="wiki link" href="{{ blink.doc.url | url }}" class="backlink">{{ blink.doc.data.title }}</a></p>
-    {%- if blink.type %}({{ blink.type }}){% endif %}
-  </li>
-{%- endfor %}
-</ul>
-
-<span>Backembeds:</span>
-
-<ul>
-{%- for bembed in backembeds %}
-  <li>
-    <p><a class="wiki link" href="{{ bembed.doc.url | url }}" class="backembed">{{ bembed.doc.data.title }}</a></p>
-  </li>
-{%- endfor %}
-</ul>
+{% include "back-refs.njk" %}
