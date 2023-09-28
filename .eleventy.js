@@ -11,9 +11,7 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 
-const matter = require('gray-matter');
-
-const SemTree = require('semtree').SemTree;
+const buildBonsai = require('./wikibonsai/semtree');
 const wikirefs = require('wikirefs');
 const buildWikirefsOpts = require('./wikibonsai/markdown');
 
@@ -75,7 +73,7 @@ module.exports = function(eleventyConfig) {
   //////////////////////////
 
   ////
-  // wikirefs
+  // markdown wikirefs
 
   // Customize Markdown library and settings:
   let markdownLibrary;
@@ -134,9 +132,9 @@ module.exports = function(eleventyConfig) {
       return htmlContent;
     },
   });
-
   eleventyConfig.setLibrary("md", markdownLibrary);
 
+  // collections
   eleventyConfig.addCollection("index", function(collectionApi) {
     // get unsorted items
     return collectionApi.getFilteredByGlob("./index/**/*.md");
@@ -146,56 +144,15 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("./entries/**/*.md");
   });
 
-  ////
-  // bonsai
-
-  function buildBonsai() {
-    // init vars
-    const bonsai = new SemTree({
-      virtualTrunk: true,
-      // graft: function (fname, ancestryFnames) {
-      //   let doc = env.collections.all.find((doc) => {
-      //     return (fname === path.basename(doc.data.page.inputPath).replace(/\.[^/.]+$/, ''));
-      //   });
-      //   if (doc) { return doc.data.page.url; }
-      // }
-      // semtree options here...
-    });
-    const bonsaiText = {}; // { filename: content } hash
-    const rootFilename = 'root';
-    // build 'bonsaiText' hash
-    const files = glob.sync("./index/**/*.md", {});
-    files.forEach((file) => {
-      const content = fs.readFileSync(file, { encoding: 'utf8' });
-      const yamlData = matter(content);
-      const basename = path.basename(file, '.md');
-      const cleanContent = yamlData.content.replace(/^\n*/, '');
-      bonsaiText[basename] = cleanContent;
-    });
-    let res;
-    try {
-      // build bonsai tree data struct
-      res = bonsai.parse(bonsaiText, rootFilename);
-      return bonsai;
-    } catch (e) {
-      console.error(e, res);
-    }
-    if (bonsai.duplicates.length > 0) {
-      console.log('bonsai duplicates: ' + bonsai.duplicates);
-    } else {
-      console.log('bonsai -- \n'
-        + 'res: ' + JSON.stringify(res) + '\n'
-        + 'root: ' + bonsai.root + '\n'
-        + 'duplicates: ' + bonsai.duplicates
-      );
-    }
-  }
-  // attach bonsai to global data
-  eleventyConfig.addGlobalData("bonsai", () => {
-    const bonsai = buildBonsai();
-    // todo: cannot for the life of me figure out how to
-    //       simply attach a file 'url' to the bonsai nodes...
-    //       (see 'findNodeUrl' filter below for workaround)
+  // semtree bonsai
+  // attach to global data
+  const bonsai = buildBonsai();
+  eleventyConfig.addGlobalData("root", () => {
+    // returning as an array of length 1 since
+    // 'branch.njk' include requires a nodes parameter
+    return [bonsai.tree.find((node) => node.text == bonsai.root)];
+  });
+  eleventyConfig.addGlobalData("tree", () => {
     return bonsai.tree;
   });
   // provide nunjucks filter to retrieve node url
