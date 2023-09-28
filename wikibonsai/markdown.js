@@ -53,6 +53,14 @@ module.exports = function (md) {
       let thatDoc = env.collections.all.find((doc) => {
         return (thatFname === path.basename(doc.data.page.inputPath).replace(/\.[^/.]+$/, ''));
       });
+      // skip index docs metadata
+      const indexDocPaths = thisDoc.data.collections.index.map((doc) => doc.inputPath);
+      if (indexDocPaths.includes(thisDoc.inputPath)
+        || ((thatDoc !== undefined)
+          && indexDocPaths.includes(thatDoc.inputPath))
+      ) {
+        return;
+      }
       // zombie case
       if (!thatDoc) {
         thatDoc = {
@@ -69,7 +77,10 @@ module.exports = function (md) {
       if (!Object.keys(thisDoc.data['foreattrs']).includes(attrtype)) {
         thisDoc.data['foreattrs'][attrtype] = [thatDoc];
       } else {
-        thisDoc.data['foreattrs'][attrtype].push(thatDoc);
+        // skip duplicates
+        if (!thisDoc.data['foreattrs'][attrtype].includes(thisDoc)) {
+          thisDoc.data['foreattrs'][attrtype].push(thisDoc);
+        }
       }
       // back
       if (!Object.keys(thatDoc.data).includes('backattrs')) {
@@ -78,7 +89,10 @@ module.exports = function (md) {
       if (!Object.keys(thatDoc.data['backattrs']).includes(attrtype)) {
         thatDoc.data['backattrs'][attrtype] = [thisDoc];
       } else {
-        thatDoc.data['backattrs'][attrtype].push(thisDoc);
+        // skip duplicates
+        if (!thatDoc.data['backattrs'][attrtype].includes(thisDoc)) {
+          thatDoc.data['backattrs'][attrtype].push(thisDoc);
+        }
       }
     },
     addLink: (env, linktype, thatFname) => {
@@ -89,6 +103,14 @@ module.exports = function (md) {
       let thatDoc = env.collections.all.find((doc) => {
         return (thatFname === path.basename(doc.data.page.inputPath).replace(/\.[^/.]+$/, ''));
       });
+      // skip index docs metadata
+      const indexDocPaths = thisDoc.data.collections.index.map((doc) => doc.inputPath);
+      if (indexDocPaths.includes(thisDoc.inputPath)
+        || ((thatDoc !== undefined)
+          && indexDocPaths.includes(thatDoc.inputPath))
+      ) {
+        return;
+      }
       // zombie case
       if (!thatDoc) {
         thatDoc = {
@@ -129,6 +151,14 @@ module.exports = function (md) {
       let thatDoc = env.collections.all.find((doc) => {
         return (thatFname === path.basename(doc.data.page.inputPath).replace(/\.[^/.]+$/, ''));
       });
+      // skip index docs metadata
+      const indexDocPaths = thisDoc.data.collections.index.map((doc) => doc.inputPath);
+      if (indexDocPaths.includes(thisDoc.inputPath)
+        || ((thatDoc !== undefined)
+          && indexDocPaths.includes(thatDoc.inputPath))
+      ) {
+        return;
+      }
       // zombie case
       if (!thatDoc) {
         thatDoc = {
