@@ -319,6 +319,9 @@ h2 + .header-anchor {
 	color: #ccc;
 	text-align: center;
 }
+.attrtype {
+  padding-left: 0px;
+}
 
 /* tag map / semantic tree */
 
