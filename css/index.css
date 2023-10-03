@@ -310,13 +310,10 @@ h2 + .header-anchor {
 	color: #ccc;
 	text-align: center;
 }
-.subtitle {
-	text-align: center;
-}
 .sections {
 	display: flex;
 	align-items: flex-start;
-	justify-content: space-between;
+	justify-content: space-evenly;
 }
 .section-title {
 	color: #ccc;

@@ -2,7 +2,7 @@
 	<h3 class="title">Links To This Page</h3>
 	<div class="sections">
 		<div>
-			<span class="subtitle">Attributes</span>
+			<span class="section-title">Attributes</span>
 			<ul>
 				{%- for type, battrs in backattrs %}
 				<li>
@@ -19,22 +19,12 @@
 			</ul>
 		</div>
 		<div>
-			<span class="subtitle">Links</span>
+			<span class="section-title">Links</span>
 			<ul>
 				{%- for blink in backlinks %}
 					<li>
 						<a class="wiki" href="{{ blink.doc.url | url }}" class="backlink">{{ blink.doc.data.title }}</a>
 						{%- if blink.type %}({{ blink.type }}){% endif %}
-					</li>
-				{%- endfor %}
-			</ul>
-		</div>
-		<div>
-			<span class="subtitle">Embeds</span>
-			<ul>
-				{%- for bembed in backembeds %}
-					<li>
-						<a class="wiki" href="{{ bembed.doc.url | url }}" class="backembed">{{ bembed.doc.data.title }}</a>
 					</li>
 				{%- endfor %}
 			</ul>
