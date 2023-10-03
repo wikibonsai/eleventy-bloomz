@@ -1,10 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
-
 const matter = require('gray-matter');
-
 const SemTree = require('semtree').SemTree;
+const constants = require('./const');
 
 
 module.exports = function buildBonsai() {
@@ -20,9 +19,8 @@ module.exports = function buildBonsai() {
     // semtree options here...
   });
   const bonsaiText = {}; // { filename: content } hash
-  const rootFilename = 'i.bonsai';
   // build 'bonsaiText' hash
-  const files = glob.sync("./index/**/*.md", {});
+  const files = glob.sync(constants.INDEX_GLOB, {});
   files.forEach((file) => {
     const content = fs.readFileSync(file, { encoding: 'utf8' });
     const yamlData = matter(content);
@@ -33,8 +31,8 @@ module.exports = function buildBonsai() {
   let res;
   try {
     // build bonsai tree data struct
-    res = bonsai.parse(bonsaiText, rootFilename);
-    const files = glob.sync("./entries/**/*.md", {});
+    res = bonsai.parse(bonsaiText, constants.ROOT_FNAME);
+    const files = glob.sync(constants.ENTRIES_GLOB, {});
     for (let node of bonsai.tree) {
       const file = files.find((file) => path.basename(file, '.md') == node.text);
       if (file !== undefined) {

@@ -11,6 +11,7 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 
+const constants = require('./wikibonsai/const');
 const buildBonsai = require('./wikibonsai/semtree');
 const wikirefs = require('wikirefs');
 const buildWikirefsOpts = require('./wikibonsai/wikirefs');
@@ -79,7 +80,7 @@ module.exports = function(eleventyConfig) {
   let markdownLibrary;
   markdownLibrary = markdownIt({
     html: true,
-    linkify: true
+    linkify: true,
   }).use(markdownItAnchor, {
     permalink: markdownItAnchor.permalink.ariaHidden({
       placement: "after",
@@ -137,11 +138,11 @@ module.exports = function(eleventyConfig) {
   // collections
   eleventyConfig.addCollection("index", function(collectionApi) {
     // get unsorted items
-    return collectionApi.getFilteredByGlob("./index/**/*.md");
+    return collectionApi.getFilteredByGlob(constants.INDEX_GLOB);
   });
   eleventyConfig.addCollection("entries", function(collectionApi) {
     // get unsorted items
-    return collectionApi.getFilteredByGlob("./entries/**/*.md");
+    return collectionApi.getFilteredByGlob(constants.ENTRIES_GLOB);
   });
 
   // semtree bonsai
@@ -223,9 +224,9 @@ module.exports = function(eleventyConfig) {
 
     // These are all optional (defaults are shown):
     dir: {
-      input: ".",
-      includes: "_includes",
-      data: "_data",
+      input: "content",          // default: "."
+      includes: "../_includes",  // default: "_includes"
+      data: "../_data",          // default: "_data"
       output: "_site"
     },
   };

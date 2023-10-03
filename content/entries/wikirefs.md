@@ -7,6 +7,7 @@ layout: layouts/entry.njk
 
 This is an entry that describes [[wikirefs]].
 
+:attr::[[semtree]]
 
 :attr::[[thirdpost]]
 
