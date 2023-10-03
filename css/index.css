@@ -306,7 +306,7 @@ h2 + .header-anchor {
 
 /* tag map / semantic tree */
 
-.hash {
+.branch {
 	color: var(--text-color-wiki);
 	list-style: "#";
 }

@@ -43,6 +43,8 @@ module.exports = function (md) {
     },
     // resolveDocType: () => {};
     // resolveEmbedContent: () => // see .eleventy.js for implementation; define close to markdown-it instance
+
+    ////
     // metadata configs
     // see: https://github.com/11ty/eleventy/issues/1510#issuecomment-1046128400
     addAttr: (env, attrtype, thatFname) => {
