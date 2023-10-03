@@ -1,0 +1,19 @@
+<nav class="bread-crumbs">
+  <ol>
+    <li class="site-item">
+      <a href="/">{{ metadata.title }}</a>
+    </li>
+    {% for node in ancestors %}
+      <li>
+        {% if node.url %}
+          <a class="wiki" href="{{ node.url }}">{{ node.text }}</a>
+        {% else %}
+          <a class="invalid">{{ node.text }}</a>
+        {% endif %}
+      </li>
+    {%- endfor %}
+    <li>
+      <a>{{ title }}</a>
+    </li>
+  </ul>
+</nav>

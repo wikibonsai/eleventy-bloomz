@@ -276,6 +276,25 @@ h2 + .header-anchor {
 	font-size: 1.5em;
 }
 
+/* bread-crumbs include */
+
+.bread-crumbs ol {
+	list-style: '> ';
+	display: flex;
+	align-self: center;
+	overflow-x: scroll;
+	white-space: nowrap;
+	padding-left: 0px;
+}
+
+.bread-crumbs li {
+	padding-right: 1.5em;
+}
+
+.site-item {
+	list-style: none;
+}
+
 /* back-refs include */
 
 .back-refs li {

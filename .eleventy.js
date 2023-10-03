@@ -13,7 +13,7 @@ const pluginNavigation = require("@11ty/eleventy-navigation");
 
 const buildBonsai = require('./wikibonsai/semtree');
 const wikirefs = require('wikirefs');
-const buildWikirefsOpts = require('./wikibonsai/markdown');
+const buildWikirefsOpts = require('./wikibonsai/wikirefs');
 
 
 module.exports = function(eleventyConfig) {
@@ -161,10 +161,14 @@ module.exports = function(eleventyConfig) {
     const nodeFile = (files || []).find(file => indexFile.test(file.inputPath));
     return nodeFile ? nodeFile.url : '';
   }
-  function getNodes(nodes) {
-    return bonsai.tree.filter((node) => nodes.includes(node.text));
+  function getNode(fname) {
+    return bonsai.tree.filter((node) => node.text === fname);
+  }
+  function getNodes(fnames) {
+    return bonsai.tree.filter((node) => fnames.includes(node.text));
   }
   eleventyConfig.addFilter("findNodeUrl", findNodeUrl);
+  eleventyConfig.addFilter("getNode", getNode);
   eleventyConfig.addFilter("getNodes", getNodes);
 
   //////////////////////////
@@ -223,6 +227,6 @@ module.exports = function(eleventyConfig) {
       includes: "_includes",
       data: "_data",
       output: "_site"
-    }
+    },
   };
 };

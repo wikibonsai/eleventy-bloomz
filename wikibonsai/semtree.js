@@ -34,6 +34,13 @@ module.exports = function buildBonsai() {
   try {
     // build bonsai tree data struct
     res = bonsai.parse(bonsaiText, rootFilename);
+    const files = glob.sync("./entries/**/*.md", {});
+    for (let node of bonsai.tree) {
+      const file = files.find((file) => path.basename(file, '.md') == node.text);
+      if (file !== undefined) {
+        node.url = '/entries/' + path.basename(file, '.md');
+      }
+    }
     return bonsai;
   } catch (e) {
     console.error(e, res);

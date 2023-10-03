@@ -1,9 +1,8 @@
 <ul class="branch">
   {% for node in nodes %}
-    {% set file_url = collections.all | findNodeUrl(node.text) %}
     <li>
-      {% if file_url %}
-        <a class="wiki" href="{{ file_url }}">{{ node.text }}</a>
+      {% if node.url %}
+        <a class="wiki" href="{{ node.url }}">{{ node.text }}</a>
       {% else %}
         <a class="invalid">{{ node.text }}</a>
       {% endif %}

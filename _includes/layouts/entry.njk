@@ -3,6 +3,8 @@ layout: layouts/base.njk
 templateClass: tmpl-post
 ---
 
+{% include "bread-crumbs.njk" %}
+
 {{ content | safe }}
 
 {% include "back-refs.njk" %}
