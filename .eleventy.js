@@ -1,10 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
+const matter = require("gray-matter");
 
 const { DateTime } = require("luxon");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
+const markdownItFootNote = require("markdown-it-footnote");
 const markdownItWikiRefs = require("markdown-it-wikirefs");
 
 const pluginRss = require("@11ty/eleventy-plugin-rss");
@@ -81,7 +83,9 @@ module.exports = function(eleventyConfig) {
   markdownLibrary = markdownIt({
     html: true,
     linkify: true,
-  }).use(markdownItAnchor, {
+  })
+  .use(markdownItFootNote, {})
+  .use(markdownItAnchor, {
     permalink: markdownItAnchor.permalink.ariaHidden({
       placement: "after",
       class: "direct-link",
@@ -122,12 +126,15 @@ module.exports = function(eleventyConfig) {
         } else if (mkdnContent.length === 0) {
           htmlContent = '';
         } else {
-          htmlContent = markdownLibrary.render(mkdnContent, env);
+          // strip yaml frontmatter
+          const res = matter(mkdnContent);
+          // reset attrs for embeds
+          env.attrs = {};
+          htmlContent = markdownLibrary.render(res.content, env);
         }
       // zombie (or error) case
       } catch (e) {
         console.warn(e);
-        htmlContent = '🧟';
       }
       delete env.cycleStack;
       return htmlContent;

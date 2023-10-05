@@ -32,6 +32,7 @@
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.4",
     "markdown-it-caml": "^0.0.2",
+    "markdown-it-footnote": "^3.0.3",
     "markdown-it-wikirefs": "^0.0.3",
     "semtree": "^0.0.2",
     "wikirefs": "^0.0.4"
