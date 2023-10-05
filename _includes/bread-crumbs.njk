@@ -1,8 +1,5 @@
 <nav class="bread-crumbs">
   <ol>
-    <li class="site-item">
-      <a href="/">{{ metadata.title }}</a>
-    </li>
     {% for node in ancestors %}
       <li>
         {% if node.url %}
