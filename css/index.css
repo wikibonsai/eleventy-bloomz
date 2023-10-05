@@ -276,6 +276,12 @@ h2 + .header-anchor {
 	font-size: 1.5em;
 }
 
+/* entry */
+
+.entry-content {
+	min-height: 100vh;
+}
+
 /* bread-crumbs include */
 
 .bread-crumbs ol {
@@ -320,7 +326,7 @@ h2 + .header-anchor {
 	text-align: center;
 }
 .attrtype {
-  padding-left: 0px;
+	padding-left: 0px;
 }
 
 /* tag map / semantic tree */
@@ -340,7 +346,7 @@ h2 + .header-anchor {
 /* attrbox */
 aside.attrbox {
 	text-align: center;
-	border: 1px double #ccc;
+	border: 1px double #535353;
 	color: #ccc;
 	border-radius: 25px;
 	border-spacing: 1em;
@@ -431,6 +437,8 @@ a.invalid {
 }
 /* embed media */
 .embed-media {
+	display: flex;
+	justify-content: center;
 	margin: 0 auto;
 }
 .embed-audio {
@@ -438,8 +446,8 @@ a.invalid {
 	width: 100%;
 }
 .embed-image {
-	height: 50%;
-	width: 50%;
+	height: 75%;
+	width: 75%;
 }
 .embed-video {
 	height: 75%;
