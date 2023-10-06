@@ -1,6 +1,13 @@
 ---
 title: WikiBonsai
+date: '2023-10-05'
 layout: layouts/entry.njk
 ---
 
-WikiBonsai adds a couple of workflows: [[wikirefs]] and [[semtree]]!
+
+![[wikibonsai-way.png]][^twt]
+
+![[eleventy-wikibonsai]]
+
+
+[^twt]: [explain](https://twitter.com/wibomd/status/1703930973371412699)

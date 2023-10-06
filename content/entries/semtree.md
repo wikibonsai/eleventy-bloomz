@@ -1,11 +1,7 @@
 ---
-title: Semantic Tree
-alias: Knowledge Bonsai
+title: SemTree
+date: '2023-10-05'
 layout: layouts/entry.njk
 ---
 
-# Semantic Tree
-
-This is an entry that describes the semantic tree -- also known as the "knowledge bonsai".
-
-An example of such a tree can be viewed [here](/bonsai).
+The `semtree` package is responsible for building the [[semantic-tree]]. It can be found on [GitHub](https://github.com/wikibonsai/semtree).
