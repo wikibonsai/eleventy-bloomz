@@ -7,15 +7,17 @@ const { DateTime } = require("luxon");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItFootNote = require("markdown-it-footnote");
+const markdownItCaml = require("markdown-it-caml");
 const markdownItWikiRefs = require("markdown-it-wikirefs");
 
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 
+const wikirefs = require('wikirefs');
+
 const constants = require('./wikibonsai/const');
 const buildBonsai = require('./wikibonsai/semtree');
-const wikirefs = require('wikirefs');
 const buildWikirefsOpts = require('./wikibonsai/wikirefs');
 
 
@@ -93,6 +95,8 @@ module.exports = function(eleventyConfig) {
     }),
     level: [1,2,3,4],
     slugify: eleventyConfig.getFilter("slugify")
+  }).use(markdownItCaml, {
+    // 
   }).use(markdownItWikiRefs, {
     ...buildWikirefsOpts(markdownLibrary),
     // wikiembed note:
