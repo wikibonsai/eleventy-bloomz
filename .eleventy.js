@@ -162,10 +162,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addGlobalData("root", () => {
     // returning as an array of length 1 since
     // 'branch.njk' include requires a nodes parameter
-    return [bonsai.tree.find((node) => node.text == bonsai.root)];
+    return [bonsai.nodes.find((node) => node.text == bonsai.root)];
   });
   eleventyConfig.addGlobalData("tree", () => {
-    return bonsai.tree;
+    return bonsai.nodes;
   });
   // provide nunjucks filter to retrieve node url
   function findNodeUrl(files, text) {
@@ -174,10 +174,10 @@ module.exports = function(eleventyConfig) {
     return nodeFile ? nodeFile.url : '';
   }
   function getNode(fname) {
-    return bonsai.tree.filter((node) => node.text === fname);
+    return bonsai.nodes.filter((node) => node.text === fname);
   }
   function getNodes(fnames) {
-    return bonsai.tree.filter((node) => fnames.includes(node.text));
+    return bonsai.nodes.filter((node) => fnames.includes(node.text));
   }
   eleventyConfig.addFilter("findNodeUrl", findNodeUrl);
   eleventyConfig.addFilter("getNode", getNode);
