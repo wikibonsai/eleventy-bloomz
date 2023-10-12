@@ -7,7 +7,7 @@ layout: layouts/entry.njk
 plugin::[[markdown-it-wikirefs]]
 
 
-`[[WikiRefs]]`[^names] are a crucial part of the world of [[digital-garden|digital gardening]]. They are the basic building block of the interlinking accomplished in many gardens, including this one. They are rendered with the [[markdown-it-wikirefs]] plugin and you can check out those docs for more details.
+`[[WikiRefs]]`[^names] are a crucial part of the world of [[digital-garden|digital gardening]]. They are the basic building block of the interlinking accomplished in many gardens, including this one. They are rendered with the [[markdown-it-wikirefs]] plugin, are rendered in a different color than external web links, and you can check out those docs for more details.
 
 But in short, This particular flavour of `[[wikirefs]]` includes three kinds of wiki constructs: wikiattrs, wikilinks, and wikiembeds.
 
