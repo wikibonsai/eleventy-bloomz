@@ -15,7 +15,7 @@ _WikiAttrs_ are formalized attributes of a file. They include a descriptive attr
 
 _WikiLinks_ are traditional bidirectional links using the square bracket syntax and may appear anywhere in a file. There are `:typed::[[wikilinks]]` and regular untyped `[[wikilinks]]`. They are highlighted in a different color than external web links.
 
-_WikiEmbeds_ embed the content of the linked file into the current one in-place. Markdown files may be embedded as well as images, audio, or video files.
+_WikiEmbeds_ embed the content of the linked file into the current one in-place. Markdown files may be embedded as well as images, audio, or video files. WikiEmbeds look like `![[this]]`.
 
 
 [^names]: "wikiref" actually goes by many names: "[wikilink](https://en.wikipedia.org/wiki/Help:Link)", "[bidirectional link](https://maggieappleton.com/bidirectionals)", "[wikitext linking](https://tiddlywiki.com/#Linking%20in%20WikiText)","backlink", "[internal link](https://help.obsidian.md/How+to/Internal+link)", "humble double bracket internal link", to name only a few...
