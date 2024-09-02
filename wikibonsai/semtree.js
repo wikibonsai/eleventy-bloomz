@@ -2,22 +2,17 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 const matter = require('gray-matter');
-const SemTree = require('semtree').SemTree;
+const semtree = require('semtree');
 const constants = require('./const');
 
 
 module.exports = function buildBonsai() {
   // init vars
-  const bonsai = new SemTree({
+  const opts = {
     virtualTrunk: true,
-    // graft: function (fname, ancestryFnames) {
-    //   let doc = env.collections.all.find((doc) => {
-    //     return (fname === path.basename(doc.data.page.inputPath).replace(/\.[^/.]+$/, ''));
-    //   });
-    //   if (doc) { return doc.data.page.url; }
-    // }
     // semtree options here...
-  });
+    // https://github.com/wikibonsai/semtree?tab=readme-ov-file#options
+  };
   const bonsaiText = {}; // { filename: content } hash
   // build 'bonsaiText' hash
   const files = glob.sync(constants.INDEX_GLOB, {});
@@ -28,10 +23,10 @@ module.exports = function buildBonsai() {
     const cleanContent = yamlData.content.replace(/^\n*/, '');
     bonsaiText[basename] = cleanContent;
   });
-  let res;
+  let bonsai = 'uninitialized bonsai';
   try {
     // build bonsai tree data struct
-    res = bonsai.parse(bonsaiText, constants.ROOT_FNAME);
+    bonsai = semtree.create(constants.ROOT_FNAME, bonsaiText, opts);
     const files = glob.sync(constants.ENTRIES_GLOB, {});
     for (let node of bonsai.nodes) {
       const file = files.find((file) => path.basename(file, '.md') == node.text);
@@ -39,17 +34,21 @@ module.exports = function buildBonsai() {
         node.url = '/entries/' + path.basename(file, '.md');
       }
     }
+    console.log('bonsai: \n'
+      + '\n---\n'
+      + 'root: ' + bonsai.root
+      + '\n---\n'
+      + 'trunk: ' + bonsai.trunk
+      + '\n---\n'
+      + 'petioleMap: ' + JSON.stringify(bonsai.petioleMap)
+      + '\n---\n'
+      + 'orphans: ' + bonsai.orphans
+      + '\n---\n'
+      + 'nodes: ' + JSON.stringify(bonsai.nodes)
+      + '\n---\n'
+    );
     return bonsai;
   } catch (e) {
-    console.error(e, res);
-  }
-  if (bonsai.duplicates.length > 0) {
-    console.log('bonsai duplicates: ' + bonsai.duplicates);
-  } else {
-    console.log('bonsai -- \n'
-      + 'res: ' + JSON.stringify(res) + '\n'
-      + 'root: ' + bonsai.root + '\n'
-      + 'duplicates: ' + bonsai.duplicates
-    );
+    console.error(e, bonsai);
   }
 }
