@@ -4,7 +4,7 @@
 
 An [11ty base blog](https://github.com/11ty/eleventy-base-blog) with [wikibonsai](https://github.com/wikibonsai/wikibonsai) support.
 
-You can see the live demo [here](https://eleventy-wikibonsai.netlify.com/).
+You can see the live demo [here](https://eleventy-wikibonsai.netlify.app/).
 
 💐 Display your [🎋 WikiBonsai](https://github.com/wikibonsai/wikibonsai) digital garden for others.
 
