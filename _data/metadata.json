@@ -1,21 +1,21 @@
 {
-  "title": "eleventy-wikibonsai",
-  "url": "https://eleventy-wikibonsai.netlify.app/",
+  "title": "eleventy-bloomz",
+  "url": "https://eleventy-bloomz.netlify.app/",
   "language": "en",
   "description": "Just keep tending...",
   "feed": {
     "subtitle": "Just keep tending...",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://eleventy-wikibonsai.netlify.app/"
+    "id": "https://eleventy-bloomz.netlify.app/"
   },
   "jsonfeed": {
     "path": "/feed/feed.json",
-    "url": "https://https://eleventy-wikibonsai.netlify.app/feed/feed.json"
+    "url": "https://https://eleventy-bloomz.netlify.app/feed/feed.json"
   },
   "author": {
     "name": "Your Name Here",
     "email": "youremailaddress@example.com",
-    "url": "https://https://eleventy-wikibonsai.netlify.app/about-me/"
+    "url": "https://https://eleventy-bloomz.netlify.app/about-me/"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "eleventy-wikibonsai",
-  "version": "0.0.1",
+  "name": "eleventy-bloomz",
+  "version": "0.0.2",
   "description": "A starter project for a WikiBonsai digital garden using the Eleventy static site generator.",
   "license": "MIT",
   "author": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wikibonsai/eleventy-wikibonsai"
+    "url": "https://github.com/wikibonsai/eleventy-bloomz"
   },
   "scripts": {
     "build": "npx @11ty/eleventy",

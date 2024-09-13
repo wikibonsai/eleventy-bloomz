@@ -2,7 +2,7 @@
 title: knowledge bonsai
 ---
 
-- [[eleventy-wikibonsai]]
+- [[eleventy-bloomz]]
   - [[test]]
     - [[test-render]]
   - [[digital-garden]]

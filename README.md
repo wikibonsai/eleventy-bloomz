@@ -1,19 +1,24 @@
-# eleventy-wikibonsai
+# Eleventy-Bloomz
 
 [![A WikiBonsai Project](https://img.shields.io/badge/%F0%9F%8E%8B-A%20WikiBonsai%20Project-brightgreen)](https://github.com/wikibonsai/wikibonsai)
 
-An [11ty base blog](https://github.com/11ty/eleventy-base-blog) with [wikibonsai](https://github.com/wikibonsai/wikibonsai) support.
+<p align="center">
+  <img src="./img/eleventy-logo.svg" width="150" height="150"/>
+  <img src="./img/bloomz.svg" width="150" height="150"/>
+</p>
 
-You can see the live demo [here](https://eleventy-wikibonsai.netlify.app/).
+An [11ty template](https://github.com/11ty/eleventy-base-blog) with [WikiBonsai](https://github.com/wikibonsai/wikibonsai) support.
 
-💐 Display your [🎋 WikiBonsai](https://github.com/wikibonsai/wikibonsai) digital garden for others.
+You can see the live demo [here](https://eleventy-bloomz.netlify.app/).
+
+🌸 Share bloomz from your [🎋 WikiBonsai](https://github.com/wikibonsai/wikibonsai) digital garden.
 
 ## Getting Started
 
 ### 1. Clone this Repository
 
 ```
-git clone https://github.com/wikibonsai/eleventy-wikibonsai.git my-blog-name
+git clone https://github.com/wikibonsai/eleventy-bloomz.git my-blog-name
 ```
 
 ### 2. Navigate to the directory
@@ -56,7 +61,7 @@ DEBUG=* npx @11ty/eleventy
 
 ## 🪴 Project Structure
 
-Inside of your Astro-Wikibonsai project, you'll see the following folders and files:
+Inside of your Eleventy-Bloomz project, you'll see the following folders and files:
 
 ```text
 ├── _data/
