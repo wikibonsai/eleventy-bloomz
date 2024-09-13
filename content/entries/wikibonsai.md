@@ -7,7 +7,9 @@ layout: layouts/entry.njk
 
 ![[wikibonsai-way.png]][^twt]
 
-![[eleventy-wikibonsai]]
+Eleventy-Bloomz is a [WikiBonsai](https://github.com/wikibonsai/wikibonsai) project.
+
+![[eleventy-bloomz]]
 
 
 [^twt]: [explain](https://twitter.com/wibomd/status/1703930973371412699)
