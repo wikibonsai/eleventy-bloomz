@@ -9,7 +9,7 @@ const constants = require('./const');
 module.exports = function buildBonsai() {
   // init vars
   const opts = {
-    virtualTrunk: true,
+    virtualBranches: true,
     // semtree options here...
     // https://github.com/wikibonsai/semtree?tab=readme-ov-file#options
   };
@@ -38,7 +38,7 @@ module.exports = function buildBonsai() {
       + '\n---\n'
       + 'root: ' + bonsai.root
       + '\n---\n'
-      + 'trunk: ' + bonsai.trunk
+      + 'branches: ' + bonsai.branches
       + '\n---\n'
       + 'petioleMap: ' + JSON.stringify(bonsai.petioleMap)
       + '\n---\n'
