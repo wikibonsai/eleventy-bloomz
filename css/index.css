@@ -345,29 +345,31 @@ h2 + .header-anchor {
 
 /* attrbox */
 aside.attrbox {
-	text-align: center;
 	border: 1px double #535353;
 	color: #ccc;
 	border-radius: 25px;
-	border-spacing: 1em;
 	/* @noflip */
 	margin: 0.5em;
-	padding: 0.2em;
+	padding: 0.75em 1em;
 	/* @noflip */
 	float: right;
-}
-span.attrbox-title {
-	margin: 0.5em;
-	color: #ccc;
+	max-width: 40%;
 }
 /* from: https://www.the-art-of-web.com/css/format-dl/ */
 dl {
-	margin: 0.5em;
+	margin: 0;
+	text-align: left;
+}
+.attr-item {
+	display: grid;
+	grid-template-columns: 100px 1fr;
+	margin-bottom: 0.3em;
+}
+.attr-item:last-child {
+	margin-bottom: 0;
 }
 dt {
-	width: 100px;
-	float: left;
-	clear: left;
+	grid-column: 1;
 	text-align: right;
 	font-weight: bold;
 }
@@ -375,8 +377,12 @@ dt::after {
 	content: ":";
 }
 dd {
-	margin: 0 0 0 110px;
-	padding: 0 0 0.5em 0;
+	grid-column: 2;
+	margin: 0;
+	padding-left: 0.5em;
+}
+dd:first-of-type {
+	align-self: end;
 }
 
 /* (internal) wiki links */
