@@ -18,8 +18,6 @@
 	--text-color-link-active: #204092;
 	--text-color-link-visited: #204092;
 	--text-color-wiki: #009c7b;
-	--text-color-wiki-visited: #008064;
-	--text-color-invalid-wikilink: #8c8c8c;
 
 	--syntax-tab-size: 2;
 }
@@ -35,8 +33,6 @@
 		--text-color-link-active: #59b3f3;
 		--text-color-link-visited: #59b3f3;
 		--text-color-wiki: #a0e4a0;
-		--text-color-wiki-visited: #90f390;
-		--text-color-invalid-wikilink: #8c8c8c;
 
 		--background-color: #15202b;
 	}
@@ -325,137 +321,201 @@ h2 + .header-anchor {
 	color: #ccc;
 	text-align: center;
 }
-.attrtype {
-	padding-left: 0px;
-}
 
 /* tag map / semantic tree */
 
 .branch {
-	color: var(--text-color-wiki);
+	color: var(--wb-syntax-link); /* match wiki-link color */
 	list-style: "#";
 }
 
-/******************/
-/* wikiref styles */
-/******************/
+/* ── WikiBonsai wikiref + CAML styles ─────────────────────────
+ * COPIED from the canonical WikiBonsai styles module
+ * (app/tendr/src/lib/styles/  →  future @wikibonsai/styles).
+ * Source of truth lives there — keep in sync; don't diverge silently.
+ * ──────────────────────────────────────────────────────────── */
 
+/* palette (from theme.css) */
+:root {
+  --wb-syntax-link: #16a34a;
+  --wb-syntax-key: #2563eb;
+  --wb-syntax-value: #0891b2;
+  --wb-syntax-bracket: #8aaa9a;
+  --wb-syntax-zombie: #7a777f;
+}
 
-/* wikiattr */
+[data-theme='day-garden'] {
+  --wb-syntax-link: #16a34a;
+  --wb-syntax-key: #2563eb;
+  --wb-syntax-value: #0891b2;
+  --wb-syntax-bracket: #8aaa9a;
+  --wb-syntax-zombie: #7a777f;
+}
 
-/* attrbox */
+[data-theme='dark'] {
+  --wb-syntax-link: #22c55e;
+  --wb-syntax-key: #60a5fa;
+  --wb-syntax-value: #22d3ee;
+  --wb-syntax-bracket: #636870;
+  --wb-syntax-zombie: #a8a4ae;
+}
+
+[data-theme='night-sky'] {
+  --wb-syntax-link: #22c55e;
+  --wb-syntax-key: #60a5fa;
+  --wb-syntax-value: #22d3ee;
+  --wb-syntax-bracket: #636870;
+  --wb-syntax-zombie: #a8a4ae;
+}
+
+/* mirror the canonical dark palette onto eleventy's auto-dark theming */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wb-syntax-link: #22c55e;
+    --wb-syntax-key: #60a5fa;
+    --wb-syntax-value: #22d3ee;
+    --wb-syntax-bracket: #636870;
+    --wb-syntax-zombie: #a8a4ae;
+  }
+}
+
+/* eleventy-bloomz CUSTOM OVERRIDE — this site's wiki-link color is TEAL (tuned to
+   match its blue web-link shade), not the canonical green. Placed AFTER the copied
+   canonical palette so it wins; anything referencing --wb-syntax-link (wiki links,
+   the .branch tag map) follows automatically. */
+:root {
+  --wb-syntax-link: #009c7b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wb-syntax-link: #a0e4a0;
+  }
+}
+
+/* attrbox (from attrbox.css) */
+/* box chrome — float-right document callout (layout stays consumer-owned) */
 aside.attrbox {
-	border: 1px double #535353;
-	color: #ccc;
-	border-radius: 25px;
-	/* @noflip */
-	margin: 0.5em;
-	padding: 0.75em 1em;
-	/* @noflip */
-	float: right;
-	max-width: 40%;
+  border: 1px double var(--wb-syntax-bracket, #535353);
+  border-radius: 25px;
+  margin: 0.5em;
+  padding: 0.75em 1em;
+  float: right;
+  max-width: 40%;
 }
-/* from: https://www.the-art-of-web.com/css/format-dl/ */
-dl {
-	margin: 0;
-	text-align: left;
-}
-.attr-item {
-	display: grid;
-	grid-template-columns: 100px 1fr;
-	margin-bottom: 0.3em;
-}
-.attr-item:last-child {
-	margin-bottom: 0;
-}
-dt {
-	grid-column: 1;
-	text-align: right;
-	font-weight: bold;
-}
-dt::after {
-	content: ":";
-}
-dd {
-	grid-column: 2;
-	margin: 0;
-	padding-left: 0.5em;
-}
-dd:first-of-type {
-	align-self: end;
+.attrbox dl {
+  margin: 0;
+  text-align: left;
 }
 
-/* (internal) wiki links */
+.attrbox .attr-item {
+  display: grid;
+  grid-template-columns: var(--attrbox-key-width, 100px) 1fr;
+  margin-bottom: 0.3em;
+}
+.attrbox .attr-item:last-child {
+  margin-bottom: 0;
+}
+
+.attrbox dt {
+  grid-column: 1;
+  text-align: right;
+  font-weight: bold;
+  /* keys are plain BOLD text; values are plain normal text. --wb-syntax-key/value
+     are editor-only (syntax highlighting), not rendered output. */
+  align-self: start;
+}
+.attrbox dt::after {
+  content: ":";
+}
+
+.attrbox dd {
+  grid-column: 2;
+  margin: 0;
+  padding-left: 0.5em;
+  /* value bottom-aligned within its row (see dt above) */
+  align-self: end;
+  /* grid items default to min-width:auto, which lets a long/unbreakable value
+     overflow the box. min-width:0 lets it shrink into the 1fr column and
+     overflow-wrap breaks long tokens so they wrap instead of spilling out. */
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Scalar values are plain normal text (no --wb-syntax-value — editor-only).
+ * Wiki values (a.attr.wiki) get their link color from the wikiref rules below. */
+
+/* wikilinks + wikiembeds (from wikiref.css) */
+
+/* valid references — ANY wiki anchor with an href (body links, embeds, wiki attr
+   values, and plain a.wiki template links: nav/tags/backlinks). Invalid refs have
+   no href. Underlined by design. */
 a.wiki[href] {
-	color: var(--text-color-wiki);
-}
-a.wiki[href]:visited {
-	color: var(--text-color-wiki-visited);
-}
-a.invalid {
-	color: var(--text-color-invalid-wikilink);
-	cursor: help;
+  color: var(--wb-syntax-link, #16a34a);
+  text-decoration: underline;
 }
 
-/* !wikiembed */
+/* invalid / zombie references — requires both `wiki` + `invalid` (never bare
+   `.invalid`, to avoid clobbering unrelated downstream classes). */
+a.wiki.invalid {
+  color: var(--wb-syntax-zombie, #7a777f);
+  text-decoration: none;
+  cursor: help;
+  opacity: 0.7;
+}
 
+/* type hooks: consumers may add e.g. `.reftype__author { color: … }` — no default */
+
+/* wikiembeds */
 .embed-wrapper {
-	border: 1px solid #535353;
-	border-radius: 6px;
-	padding: 5px 20px 15px 20px;
-	margin: 0 20px;
-	position: relative;
+  position: relative;
+  border: 1px solid var(--wb-syntax-bracket, #8aaa9a);
+  border-radius: 6px;
+  padding: 5px 20px 15px;
+  margin: 0 20px;
 }
 .embed-title {
-	height: 36px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	font-size: 26px;
-	line-height: 42px;
-	top: 5px;
-	left: 0;
-	right: 0;
-	width: 100%;
-	text-align: center;
-	font-weight: 900;
+  width: 100%;
+  text-align: center;
+  font-size: 26px;
+  line-height: 42px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .embed-link {
-	position: absolute;
-	top: 6px;
-	right: 12px;
-	cursor: pointer;
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  cursor: pointer;
 }
 .embed-link-icon {
-	text-decoration: none;
+  text-decoration: none;
 }
 .link-icon {
-	font-size: 18px;
-	color: #535353;
+  font-size: 18px;
+  color: var(--wb-syntax-bracket, #8aaa9a);
 }
-.link-icon::before{
-	content: "🔗";
+.link-icon::before {
+  content: "🔗";
 }
 .embed-content {
-	max-height: 500px;
-	overflow-y: auto;
-	padding-right: 10px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
 }
-/* embed media */
 .embed-media {
-	display: flex;
-	justify-content: center;
-	margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 .embed-audio {
-	height: 100%;
-	width: 100%;
+  width: 100%;
+  height: 100%;
 }
-.embed-image {
-	height: 75%;
-	width: 75%;
-}
+.embed-image,
 .embed-video {
-	height: 75%;
-	width: 75%;
+  width: 75%;
+  height: 75%;
 }

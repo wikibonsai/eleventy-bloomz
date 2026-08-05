@@ -4,7 +4,7 @@
       {% if node.url %}
         <a class="wiki" href="{{ node.url }}">{{ node.text }}</a>
       {% else %}
-        <a class="invalid">{{ node.text }}</a>
+        <a class="wiki invalid">{{ node.text }}</a>
       {% endif %}
       {% if node.children %}
         {% set nodes = node.children | getNodes(node.children) %}
